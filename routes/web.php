@@ -12,3 +12,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('spends', SpendController::class)->middleware('auth')->names('spends');
+Route::resource('category_spends', \App\Http\Controllers\CategorySpendController::class)
+    ->middleware('auth')
+    ->names('category_spends');

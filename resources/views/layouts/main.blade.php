@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('css/intern.css') }}" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body>
     <div id="app">
 
@@ -21,29 +23,45 @@
             <div class="brand">{{ config('app.name', 'Laravel') }}</div>
 
             <ul class="nav-links">
-                <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Dashboard</a></li>
-                <li><a href="{{ route('spends.index') }}" class="{{ request()->routeIs('spends.*') ? 'active' : '' }}">Gastos</a></li>
+                <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Dashboard</a>
+                </li>
+                <li
+                    class="{{ request()->routeIs('spends.*') || request()->routeIs('category_spends.*') ? 'active submenu-active' : '' }}">
+                    <a href="{{ route('spends.index') }}"
+                        class="has-chevron {{ request()->routeIs('spends.*') || request()->routeIs('category_spends.*') ? 'active' : '' }}">
+                        Gastos
+                    </a>
+                    <ul class="submenu"
+                        style="{{ request()->routeIs('spends.*') || request()->routeIs('category_spends.*') ? 'display: block;' : '' }}">
+                        <li>
+                            <a href="{{ route('category_spends.index') }}"
+                                class="{{ request()->routeIs('category_spends.*') ? 'active' : '' }}">
+                                Categorias
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li><a href="#">Link 2</a></li>
                 <li><a href="#">Link 3</a></li>
             </ul>
         </nav>
 
-<nav class="topbar">
-    <div class="user-name dropdown">
-        Olá, {{ Auth::user()->name ?? 'Usuário' }}
-        <span class="chevron"></span>
-        <div class="dropdown-menu">
-            <a href="{{ route('logout') }}"
-               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                Sair
-            </a>
-        </div>
-    </div>
+        <nav class="topbar">
+            <div class="user-name dropdown">
+                Olá, {{ Auth::user()->name ?? 'Usuário' }}
+                <span class="chevron"></span>
+                <div class="dropdown-menu">
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Sair
+                    </a>
+                </div>
+            </div>
 
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-        @csrf
-    </form>
-</nav>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        </nav>
 
         <main class="content">
             @yield('content')
@@ -56,4 +74,5 @@
     </div>
 
 </body>
+
 </html>

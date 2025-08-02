@@ -26,4 +26,8 @@ class Spend extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function categorySpend()
+    {
+        return $this->belongsTo(CategorySpend::class, 'category');
+    }
 }
