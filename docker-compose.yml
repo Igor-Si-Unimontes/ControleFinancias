@@ -10,6 +10,7 @@ services:
       - mysql
     networks:
       - laravel
+    user: "${UID}:${GID}"
 
   nginx:
     image: nginx:alpine

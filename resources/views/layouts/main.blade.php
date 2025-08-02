@@ -8,9 +8,9 @@
 
     <title>@yield('title', 'Página')</title>
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="dns-prefetch" href="//fonts.bunny.net" />
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet" />
-
     <link rel="stylesheet" href="{{ asset('css/intern.css') }}" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -22,7 +22,7 @@
 
             <ul class="nav-links">
                 <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Dashboard</a></li>
-                <li><a href="#">Link 1</a></li>
+                <li><a href="{{ route('spends.index') }}" class="{{ request()->routeIs('spends.*') ? 'active' : '' }}">Gastos</a></li>
                 <li><a href="#">Link 2</a></li>
                 <li><a href="#">Link 3</a></li>
             </ul>
@@ -47,9 +47,13 @@
 
         <main class="content">
             @yield('content')
+            @yield('styles')
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+            @yield('scripts')
         </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
