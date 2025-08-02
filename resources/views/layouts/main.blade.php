@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="dns-prefetch" href="//fonts.bunny.net" />
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/intern.css') }}" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -69,10 +70,66 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
             <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
             @yield('scripts')
         </main>
     </div>
+    @if ($errors->any())
+        <script>
+            toastr.error("Erro: {{ $errors->first() }}", '', {
+                timeOut: 5000,
+                closeButton: true,
+                progressBar: true,
+            });
+        </script>
+    @endif
 
+    @if (session('error'))
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                toastr.error(@json(session('error')), 'Erro', {
+                    timeOut: 5000,
+                    closeButton: true,
+                    progressBar: true
+                });
+            });
+        </script>
+    @endif
+
+    @if (session('success'))
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                toastr.success(@json(session('success')), 'Sucesso', {
+                    timeOut: 5000,
+                    closeButton: true,
+                    progressBar: true
+                });
+            });
+        </script>
+    @endif
+
+    <style>
+        #toast-container {
+            top: 70px !important;
+            z-index: 99999 !important;
+        }
+
+        .toast-success {
+            background-color: #28a745 !important;
+            color: white !important;
+            opacity: 1 !important;
+        }
+
+        .toast-error {
+            background-color: #dc3545 !important;
+            color: white !important;
+            opacity: 1 !important;
+        }
+
+        .toast-title {
+            font-weight: bold;
+        }
+    </style>
 </body>
 
 </html>
