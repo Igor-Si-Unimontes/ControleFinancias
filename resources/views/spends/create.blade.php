@@ -29,9 +29,15 @@
                 </div>
 
                 <div class="mb-3 col-md-6">
-                    <label for="category" class="form-label">Categoria*</label>
-                    <input type="text" class="form-control" id="category" name="category" value="{{ old('category') }}"
-                        required>
+                    <label for="category_spend_id" class="form-label">Categoria*</label>
+                    <select name="category_spend_id" id="category_spend_id" class="form-select" required>
+                        <option value="" disabled selected>Selecione uma categoria</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}"
+                                {{ old('category_spend_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="mb-3 col-md-6">

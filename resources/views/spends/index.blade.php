@@ -27,7 +27,7 @@
                         <td>{{ $spend->name }}</td>
                         <td>{{ $spend->amount }}</td>
                         <td>{{ \Carbon\Carbon::parse($spend->date)->format('d/m/Y') }}</td>
-                        <td>{{ $spend->category }}</td>
+                        <td>{{ $spend->category_spend_id ? $spend->categorySpend->name : '-' }}</td>
                         <td>{{ $spend->payment_method->label() }}</td>
                         <td class="text-center">
                             <a href="{{ route('spends.show', $spend->id) }}" class="btn btn-sm" style="color: #43a047;"

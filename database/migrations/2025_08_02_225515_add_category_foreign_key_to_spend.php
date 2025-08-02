@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('spends', function (Blueprint $table) {
             $table->dropColumn('category');
-            $table->foreignId('category_id')->nullable()->constrained('category_spends')->onDelete('set null');
+            $table->foreignId('category_spend_id')->nullable()->constrained('category_spends')->onDelete('set null');
         });
     }
 
@@ -24,8 +24,8 @@ return new class extends Migration
     {
         Schema::table('spends', function (Blueprint $table) {
             $table->string('category')->nullable();
-            $table->dropForeign(['category_id']);
-            $table->dropColumn('category_id');
+            $table->dropForeign(['category_spend_id']);
+            $table->dropColumn('category_spend_id');
         });
     }
 };

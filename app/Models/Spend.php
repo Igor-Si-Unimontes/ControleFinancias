@@ -11,7 +11,7 @@ class Spend extends Model
         'name',
         'amount',
         'date',
-        'category',
+        'category_spend_id',
         'payment_method',
         'description',
         'user_id',
@@ -28,6 +28,6 @@ class Spend extends Model
     }
     public function categorySpend()
     {
-        return $this->belongsTo(CategorySpend::class, 'category');
+        return $this->belongsTo(CategorySpend::class, 'category_spend_id');
     }
 }

@@ -3,27 +3,33 @@ namespace App\Http\Controllers;
 
 use App\Enums\FinancialPaymentMethod;
 use App\Http\Requests\StoreSpendRequest;
+use App\Models\CategorySpend;
+use App\Services\CategorySpendService;
 use App\Services\SpendService;
 use Illuminate\Http\Request;
 class SpendController
 {
     protected $service;
+    protected $categorySpendService;
 
-    public function __construct(SpendService $service)
+    public function __construct(SpendService $service, CategorySpendService $categorySpendService)
     {
         $this->service = $service;
+        $this->categorySpendService = $categorySpendService;
     }
 
     public function index()
     {
+        $categories = CategorySpend::with('spends')->get();
         $spends = $this->service->getAllSpends();
         return view('spends.index', compact('spends'));
     }
 
     public function create()
     {
+        $categories = $this->categorySpendService->getAllCategorySpends();
         $methods = FinancialPaymentMethod::cases();
-        return view('spends.create', compact('methods'));
+        return view('spends.create', compact('methods', 'categories'));
     }
     public function store(StoreSpendRequest $request)
     {
@@ -33,9 +39,10 @@ class SpendController
 
     public function edit($id)
     {
+        $categories = $this->categorySpendService->getAllCategorySpends();
         $methods = FinancialPaymentMethod::cases();
         $spend = $this->service->findSpendById($id);
-        return view('spends.edit', compact('spend', 'methods'));
+        return view('spends.edit', compact('spend', 'methods', 'categories'));
     }
     public function update(StoreSpendRequest $request, $id)
     {
@@ -44,9 +51,10 @@ class SpendController
     }
     public function show($id)
     {
+        $categories = $this->categorySpendService->getAllCategorySpends();
         $methods = FinancialPaymentMethod::cases();
         $spend = $this->service->findSpendById($id);
-        return view('spends.show', compact('spend', 'methods'));
+        return view('spends.show', compact('spend', 'methods', 'categories'));
     }
 
     public function destroy($id)

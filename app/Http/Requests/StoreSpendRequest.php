@@ -25,7 +25,7 @@ class StoreSpendRequest extends FormRequest
             'name' => 'required|string|max:255',
             'amount' => 'required|numeric|between:0,99999999.99',
             'date' => 'required|date|before_or_equal:today',
-            'category' => 'nullable|string|max:255',
+            'category_spend_id' => 'nullable',
             'payment_method' => 'nullable|in:credit_card,debit_card,money,pix',
             'description' => 'nullable|string|max:500',
             'user_id' => 'required|exists:users,id',
