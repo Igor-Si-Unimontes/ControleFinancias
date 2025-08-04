@@ -34,4 +34,8 @@ class CategorySpendService
     {
         return $this->repository->all();
     }
+    public function isTheCategoryMine(int $id)
+    {
+        return $this->repository->isTheCategoryMine($id);
+    }
 }

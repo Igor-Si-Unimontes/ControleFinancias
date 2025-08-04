@@ -34,4 +34,8 @@ class GainService
     {
         return $this->repository->all();
     }
+    public function sumAmountsMonth()
+    {
+        return $this->repository->sumAmountsMonth();
+    }
 }

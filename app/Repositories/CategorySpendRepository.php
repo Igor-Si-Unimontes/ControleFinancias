@@ -25,6 +25,10 @@ class CategorySpendRepository
     }
     public function all()
     {
-        return CategorySpend::all();
+        return CategorySpend::where('user_id', auth()->id())->orWhere('user_id', null)->get();
+    }
+    public function isTheCategoryMine($id)
+    {
+        return CategorySpend::where('id', $id)->where('user_id', auth()->id())->exists();
     }
 }

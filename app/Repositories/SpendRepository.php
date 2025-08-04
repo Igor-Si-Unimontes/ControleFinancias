@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 use App\Models\Spend;
+use Illuminate\Support\Facades\DB;
 
 class SpendRepository
 {
@@ -25,6 +26,19 @@ class SpendRepository
     }
     public function all()
     {
-        return Spend::all();
+        return Spend::all()->where('user_id', auth()->id());
+    }
+    public function sumAmountsMonth()
+    {
+        return Spend::whereMonth('date', now()->month)->where('user_id', auth()->id())->sum('amount');
+    }
+    public function totalSpentByCategory()
+    {
+        return DB::table('spends')
+            ->join('category_spends', 'spends.category_spend_id', '=', 'category_spends.id')
+            ->select('category_spends.name', DB::raw('SUM(spends.amount) as total'))
+            ->where('spends.user_id', auth()->id())
+            ->groupBy('category_spends.name')
+            ->get();
     }
 }

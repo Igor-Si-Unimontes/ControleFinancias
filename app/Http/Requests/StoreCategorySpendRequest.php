@@ -23,6 +23,7 @@ class StoreCategorySpendRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:50',
+            'user_id' => 'required|exists:users,id',
         ];
     }
 

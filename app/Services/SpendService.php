@@ -34,4 +34,12 @@ class SpendService
     {
         return $this->repository->all();
     }
+    public function sumAmountsMonth()
+    {
+        return $this->repository->sumAmountsMonth();
+    }
+    public function totalSpentByCategory()
+    {
+        return $this->repository->totalSpentByCategory();
+    }
 }

@@ -25,6 +25,10 @@ class GainRepository
     }
     public function all()
     {
-        return Gain::all();
+        return Gain::all()->where('user_id', auth()->id());
+    }
+    public function sumAmountsMonth()
+    {
+        return Gain::whereMonth('date', now()->month)->where('user_id', auth()->id())->sum('amount');
     }
 }
