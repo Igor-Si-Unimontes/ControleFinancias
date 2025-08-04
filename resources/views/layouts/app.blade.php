@@ -13,7 +13,7 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.svg') }}">
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

@@ -14,6 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/intern.css') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.svg') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -21,8 +22,11 @@
     <div id="app">
 
         <nav class="sidebar">
-            <div class="brand">{{ config('app.name', 'Laravel') }}</div>
-
+            <div class="logo">
+                <a href="{{ route('home') }}">
+                    <img src="{{ asset('img/logo.svg') }}" alt="Logo" style="width: 100px; height: 100px; display: block; margin: 0 auto;" />
+                </a>
+            </div>
             <ul class="nav-links">
                 <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Dashboard</a>
                 </li>
