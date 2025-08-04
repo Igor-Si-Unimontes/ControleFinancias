@@ -42,7 +42,7 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="#">Link 2</a></li>
+                <li><a href="{{ route('gains.index') }}" class="{{ request()->routeIs('gains.*') ? 'active' : '' }}">Ganhos</a></li>
                 <li><a href="#">Link 3</a></li>
             </ul>
         </nav>
