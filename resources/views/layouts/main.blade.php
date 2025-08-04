@@ -56,6 +56,7 @@
                 Olá, {{ Auth::user()->name ?? 'Usuário' }}
                 <span class="chevron"></span>
                 <div class="dropdown-menu">
+                    <a href="{{ route('profile.edit') }}">Editar Perfil</a>
                     <a href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Sair
