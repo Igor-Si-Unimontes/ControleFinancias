@@ -14,6 +14,7 @@
                     <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}"
                         required>
                 </div>
+                <input type="hidden" name="user_id" value="{{ auth()->id() }}">
             </div>
 
             <div class="d-flex justify-content-start gap-2 mt-3">
