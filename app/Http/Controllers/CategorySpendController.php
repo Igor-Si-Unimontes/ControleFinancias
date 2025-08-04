@@ -33,17 +33,26 @@ class CategorySpendController extends Controller
 
     public function edit($id)
     {
+        if (!$this->service->isTheCategoryMine($id)) {
+            return redirect()->route('category_spends.index')->with('error', 'Você só pode editar as categorias que criou.');
+        }
         $categorySpend = $this->service->findCategorySpendById($id);
         return view('category_spends.edit', compact('categorySpend'));
     }
     public function update(StoreCategorySpendRequest $request, $id)
     {
+        if (!$this->service->isTheCategoryMine($id)) {
+            return redirect()->route('category_spends.index')->with('error', 'Você só pode editar as categorias que criou.');
+        }
         $this->service->updateCategorySpend($id, $request->validated());
         return redirect()->route('category_spends.index')->with('success', 'Categoria atualizada com sucesso.');
     }
 
     public function destroy($id)
-    {
+    {   
+        if (!$this->service->isTheCategoryMine($id)) {
+            return redirect()->route('category_spends.index')->with('error', 'Você só pode excluir as categorias que criou.');
+        }
         $this->service->deleteCategorySpend($id);
         return redirect()->route('category_spends.index')->with('success', 'Categoria excluída com sucesso.');
     }
