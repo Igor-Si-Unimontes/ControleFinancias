@@ -47,7 +47,7 @@
                     </ul>
                 </li>
                 <li><a href="{{ route('gains.index') }}" class="{{ request()->routeIs('gains.*') ? 'active' : '' }}">Ganhos</a></li>
-                <li><a href="#">Link 3</a></li>
+                <li><a href="{{ route('reports.index') }}" class="{{ request()->routeIs('reports.*') ? 'active' : '' }}">Relatórios</a></li>
             </ul>
         </nav>
 

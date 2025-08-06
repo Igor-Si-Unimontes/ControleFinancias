@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 use App\Models\Spend;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class SpendRepository
@@ -41,10 +42,18 @@ class SpendRepository
             ->groupBy('category_spends.name')
             ->get();
     }
-    public function filtersForDateRange($startDate, $endDate)
+    public function filtersForDateRange($start, $end)
     {
-        return Spend::whereBetween('date', [$startDate, $endDate])
+        return Spend::whereBetween('date', [$start, $end])
             ->where('user_id', auth()->id())
-            ->get();
+            ->orderBy('date')
+            ->get()
+            ->map(function ($spend) {
+                return [
+                    'amount' => $spend->amount,
+                    'date' => Carbon::parse($spend->date)->format('d/m/Y'),
+                    'category_spend_id' => $spend->category_spend_id
+                ];
+            });
     }
 }

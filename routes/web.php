@@ -24,3 +24,4 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/reports', [ReportController::class, 'index'])->name('reports.index')->middleware('auth');
 Route::post('/reports', [ReportController::class, 'filterForDateRange'])->name('reports.filter')->middleware('auth');
+

@@ -5,7 +5,7 @@ class GainService
 {
     protected $repository;
 
-    public function __construct(GainRepository $repository)
+    public function __construct( GainRepository $repository)
     {
         $this->repository = $repository;
     }
