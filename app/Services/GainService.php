@@ -38,4 +38,8 @@ class GainService
     {
         return $this->repository->sumAmountsMonth();
     }
+    public function filtersForDateRange($startDate, $endDate)
+    {
+        return $this->repository->filtersForDateRange($startDate, $endDate);
+    }
 }

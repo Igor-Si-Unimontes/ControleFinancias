@@ -31,4 +31,10 @@ class GainRepository
     {
         return Gain::whereMonth('date', now()->month)->where('user_id', auth()->id())->sum('amount');
     }
+     public function filtersForDateRange($startDate, $endDate)
+    {
+        return Gain::whereBetween('date', [$startDate, $endDate])
+            ->where('user_id', auth()->id())
+            ->get();
+    }
 }

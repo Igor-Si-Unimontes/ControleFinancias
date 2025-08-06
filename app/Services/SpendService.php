@@ -42,4 +42,8 @@ class SpendService
     {
         return $this->repository->totalSpentByCategory();
     }
+    public function filtersForDateRange($startDate, $endDate)
+    {
+        return $this->repository->filtersForDateRange($startDate, $endDate);
+    }
 }

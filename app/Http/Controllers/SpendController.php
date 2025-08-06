@@ -62,4 +62,14 @@ class SpendController
         $this->service->deleteSpend($id);
         return redirect()->route('spends.index')->with('success', 'Gasto excluído com sucesso.');
     }
+    public function filterForDateRange(Request $request)
+    {
+        $validated = $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
+
+        $spends = $this->service->filtersForDateRange($validated['start_date'], $validated['end_date']);
+        return view('reports.index', compact('spends'));
+    }
 }

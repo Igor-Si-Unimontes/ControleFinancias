@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategorySpendController;
 use App\Http\Controllers\GainController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SpendController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -21,3 +22,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [UserController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [UserController::class, 'update'])->name('profile.update');
 });
+Route::get('/reports', [ReportController::class, 'index'])->name('reports.index')->middleware('auth');
+Route::post('/reports', [ReportController::class, 'filterForDateRange'])->name('reports.filter')->middleware('auth');

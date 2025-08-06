@@ -41,4 +41,10 @@ class SpendRepository
             ->groupBy('category_spends.name')
             ->get();
     }
+    public function filtersForDateRange($startDate, $endDate)
+    {
+        return Spend::whereBetween('date', [$startDate, $endDate])
+            ->where('user_id', auth()->id())
+            ->get();
+    }
 }
