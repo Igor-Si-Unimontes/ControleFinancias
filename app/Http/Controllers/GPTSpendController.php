@@ -19,13 +19,14 @@ class GPTSpendController extends Controller
     public function interpretar(Request $request)
     {
         $frase = $request->input('texto');
+        $currentDate = now('America/Sao_Paulo')->format('Y-m-d');
 
         $response = OpenAI::chat()->create([
             'model' => 'gpt-3.5-turbo',
             'messages' => [
                 [
                     'role' => 'system',
-                    'content' => 'Você é um assistente que transforma frases de gastos em JSON com os campos: name, amount, date, category. A data deve estar no formato YYYY-MM-DD. As categorias possíveis são: alimentação, educação, transporte, lazer, moradia, saúde, contas, outros.'
+                    'content' => "Você é um assistente que transforma frases de gastos em JSON com os campos: name, amount, date, category. A data deve estar no formato YYYY-MM-DD. As categorias possíveis são: alimentação, educação, transporte, lazer, moradia, saúde, contas, outros. A data de hoje é: {$currentDate}."
                 ],
                 [
                     'role' => 'user',
@@ -46,7 +47,7 @@ class GPTSpendController extends Controller
             return response()->json(['erro' => 'JSON inválido'], 422);
         }
         if (empty($dados['date'])) {
-        $dados['date'] = Carbon::now()->format('Y-m-d');
+            $dados['date'] = Carbon::now()->format('Y-m-d');
         }
 
         $categoria = CategorySpend::where('name', $dados['category'])->first();
@@ -70,4 +71,3 @@ class GPTSpendController extends Controller
         return redirect()->route('spends.index')->with('success', 'Gasto adicionado com sucesso!');
     }
 }
-
