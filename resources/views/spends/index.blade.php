@@ -6,7 +6,10 @@
     <div class="container rounded bg-fosco shadow-sm mt-4 p-5">
         <div class="d-flex justify-content-between align-items-center mb-2">
             <h1 class="mb-0 titulo">Lista de Gastos</h1>
-            <a href="{{ route('spends.create') }}" class="btn btn-success">Adicionar Novo Gasto</a>
+            <div class="d-flex gap-2">
+                <a href="{{ route('spends.create') }}" class="btn btn-success">Adicionar Novo Gasto</a>
+                <a href="{{ route('gasto.gpt') }}" class="btn btn-info">Adicionar Novo Gasto por IA</a>
+            </div>
         </div>
         <div class="divisor-underline mb-4"></div>
 
