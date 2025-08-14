@@ -19,6 +19,10 @@
                     <label for="end_date" class="form-label">Data Final:</label>
                     <input type="date" id="end_date" name="end_date" class="form-control" required>
                 </div>
+                <div class="col-md-6 mt-4">
+                    <input type="checkbox" name="generate_pdf" id="generate_pdf">
+                    <label for="generate_pdf" class="form-label">Gerar PDF</label>
+                </div>
             </div>
             <div class="text-start">
                 <button type="submit" class="btn btn-success">Gerar Relatório</button>
@@ -53,10 +57,14 @@
 
             const startDate = document.getElementById('start_date').value;
             const endDate = document.getElementById('end_date').value;
+            const generatePdf = document.getElementById('generate_pdf').checked;
             if (new Date(startDate) > new Date(endDate)) {
                 resultsDiv.innerHTML =
                     `<div class="alert alert-danger">A data inicial não pode ser maior que a data final.</div>`;
                 return;
+            }
+            if (generatePdf) {
+                window.location.href = `/reports/pdf?start_date=${startDate}&end_date=${endDate}`;
             }
             try {
                 const response = await fetch('/reports', {

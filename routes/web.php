@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/reports', [ReportController::class, 'index'])->name('reports.index')->middleware('auth');
 Route::post('/reports', [ReportController::class, 'filterForDateRange'])->name('reports.filter')->middleware('auth');
+Route::get('/reports/pdf', [ReportController::class, 'generatePdf'])->name('reports.pdf');
 Route::resource('qrcode', testeqrcode::class)->middleware('auth')->names('qrcode');
 Route::get('/gasto/gpt', [GPTSpendController::class, 'index'])->middleware('auth')->name('gasto.gpt');
 Route::post('/gasto/gpt', [GPTSpendController::class, 'interpretar'])->middleware('auth');

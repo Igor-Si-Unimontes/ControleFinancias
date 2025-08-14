@@ -50,6 +50,8 @@ class SpendRepository
             ->get()
             ->map(function ($spend) {
                 return [
+                    'name' => $spend->name,
+                    'category' => $spend->categorySpend->name,
                     'amount' => $spend->amount,
                     'date' => Carbon::parse($spend->date)->format('d/m/Y'),
                     'category_spend_id' => $spend->category_spend_id

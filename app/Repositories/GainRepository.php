@@ -40,6 +40,8 @@ class GainRepository
             ->get()
             ->map(function ($gain) {
                 return [
+                    'name' => $gain->name,
+                    'description' => $gain->description,
                     'amount' => $gain->amount,
                     'date' => Carbon::parse($gain->date)->format('d/m/Y'),
                     'category_gain_id' => $gain->category_gain_id
