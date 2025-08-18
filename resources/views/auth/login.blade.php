@@ -9,7 +9,7 @@
         <div class="col-md-6">
             <div class="card card-dark shadow-lg rounded-4">
                 <div class="card-body p-5">
-                    <h3 class="text-center mb-4 fw-bold text-success">Acesse seu controle financeiro</h3>
+                    <h3 class="text-center mb-4 fw-bold text-success">Acesse seu controle financeirooo</h3>
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
