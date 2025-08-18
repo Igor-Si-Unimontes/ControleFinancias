@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreGainRequest extends FormRequest
@@ -25,7 +26,6 @@ class StoreGainRequest extends FormRequest
             'name' => 'required|string|max:40',
             'amount' => 'required|numeric|between:0,99999999.99',
             'date' => 'required|date|before_or_equal:today',
-            'user_id' => 'required|exists:users,id',
             'description' => 'nullable|string|max:255',
         ];
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreGainRequest;
 use App\Services\GainService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GainController extends Controller
 {
@@ -28,7 +29,9 @@ class GainController extends Controller
 
     public function store(StoreGainRequest $request)
     {
-        $this->service->createGain($request->validated());
+        $data = $request->validated();
+        $data['user_id'] = Auth::id();
+        $this->service->createGain($data);
         return redirect()->route('gains.index')->with('success', 'Ganho criado com sucesso.');
     }
 
@@ -40,7 +43,9 @@ class GainController extends Controller
 
     public function update(StoreGainRequest $request, $id)
     {
-        $this->service->updateGain($id, $request->validated());
+        $data = $request->validated();
+        $data['user_id'] = Auth::id();
+        $this->service->updateGain($id, $data);
         return redirect()->route('gains.index')->with('success', 'Ganho atualizado com sucesso.');
     }
 
