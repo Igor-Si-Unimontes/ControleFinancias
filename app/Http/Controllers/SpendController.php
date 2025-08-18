@@ -7,6 +7,8 @@ use App\Models\CategorySpend;
 use App\Services\CategorySpendService;
 use App\Services\SpendService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 class SpendController
 {
     protected $service;
@@ -33,7 +35,9 @@ class SpendController
     }
     public function store(StoreSpendRequest $request)
     {
-        $this->service->createSpend($request->validated());
+        $data = $request->validated();
+        $data['user_id'] = Auth::id();
+        $this->service->createSpend($data);
         return redirect()->route('spends.index')->with('success', 'Gasto criado com sucesso.');
     }
 
@@ -46,7 +50,9 @@ class SpendController
     }
     public function update(StoreSpendRequest $request, $id)
     {
-        $this->service->updateSpend($id, $request->validated());
+        $data = $request->validated();
+        $data['user_id'] = Auth::id();
+        $this->service->updateSpend($id, $data);
         return redirect()->route('spends.index')->with('success', 'Gasto atualizado com sucesso.');
     }
     public function show($id)

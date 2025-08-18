@@ -56,10 +56,7 @@
                     <input type="text" class="form-control" id="description" name="description"
                         value="{{ old('description') }}">
                 </div>
-                <div class="mb-3 col-md-6">
-                    <input type="hidden" class="form-control" id="user_id" name="user_id"
-                        value ="{{ auth()->user()->id }}" required>
-                </div>
+               
             </div>
 
             <div class="d-flex justify-content-start gap-2 mt-3">

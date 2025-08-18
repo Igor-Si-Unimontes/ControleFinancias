@@ -28,7 +28,6 @@ class StoreSpendRequest extends FormRequest
             'category_spend_id' => 'nullable',
             'payment_method' => 'nullable|in:credit_card,debit_card,money,pix',
             'description' => 'nullable|string|max:500',
-            'user_id' => 'required|exists:users,id',
         ];
     }
     public function messages(): array
