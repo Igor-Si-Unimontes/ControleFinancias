@@ -15,7 +15,6 @@
                     <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $categorySpend->name) }}"
                         required>
                 </div>
-                <input type="hidden" name="user_id" value="{{ auth()->id() }}">
 
             </div>
 

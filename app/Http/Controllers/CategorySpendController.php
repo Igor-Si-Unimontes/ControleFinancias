@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategorySpendRequest;
 use App\Services\CategorySpendService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategorySpendController extends Controller
 {
@@ -27,7 +28,9 @@ class CategorySpendController extends Controller
     }
     public function store(StoreCategorySpendRequest $request)
     {
-        $this->service->createCategorySpend($request->validated());
+        $data = $request->validated();
+        $data['user_id'] = Auth::id();
+        $this->service->createCategorySpend($data);
         return redirect()->route('category_spends.index')->with('success', 'Categoria criada com sucesso.');
     }
 
@@ -44,7 +47,9 @@ class CategorySpendController extends Controller
         if (!$this->service->isTheCategoryMine($id)) {
             return redirect()->route('category_spends.index')->with('error', 'Você só pode editar as categorias que criou.');
         }
-        $this->service->updateCategorySpend($id, $request->validated());
+        $data = $request->validated();
+        $data['user_id'] = Auth::id();
+        $this->service->updateCategorySpend($id, $data);
         return redirect()->route('category_spends.index')->with('success', 'Categoria atualizada com sucesso.');
     }
 
