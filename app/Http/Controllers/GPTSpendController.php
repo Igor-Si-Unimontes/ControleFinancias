@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\FinancialPaymentMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use OpenAI\Laravel\Facades\OpenAI;
 use App\Models\Spend;
 use App\Models\CategorySpend;
@@ -18,6 +19,23 @@ class GPTSpendController extends Controller
     }
     public function interpretar(Request $request)
     {
+        $userId = Auth::id();
+        $today = now('America/Sao_Paulo')->toDateString();
+        $key = "user:{$userId}:gpt_requests:{$today}";
+
+        $limit = 10;
+
+        $requests = Cache::get($key, 0);
+
+        if ($requests >= $limit) {
+            return redirect()->back()->withErrors([
+                'erro' => "Você atingiu o limite diário de {$limit} requisições por dia."
+            ]);
+        }
+
+
+        Cache::put($key, $requests + 1, now()->endOfDay());
+
         $frase = $request->input('texto');
         $currentDate = now('America/Sao_Paulo')->format('Y-m-d');
 
